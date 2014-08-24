@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HabitAdmin</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <div class="container theme-showcase" role="main">
+    <div class="jumbotron">
+      <h1>HabitAdmin</h1>
+      <p>Add some cool feature to HabitRPG</p>
+      <p>Select what you want to do:</p>
+    </div>
+    <div class="metanav">
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="flash">
+        <div class="panel panel-{{ category }}">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{ message }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% endwith %}
+    <div class="container">
+      {% block body %}{% endblock %}
+    </div>
+  </div>
+  </body>
+</html>
+  
+

@@ -1,0 +1,10 @@
+a.thumbnail div.img{
+    width: 100px;
+    height: 110px;
+    margin: auto;
+    padding-top: 10px;
+}
+a.thumbnail div.img img {
+    width: 100px;
+    max-height: 100px; 
+}

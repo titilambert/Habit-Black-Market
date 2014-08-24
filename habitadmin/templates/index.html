@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="row">
+
+  <div class="col-xs-6 col-md-2">
+    <a href="#" class="thumbnail">
+      <div class="img">
+        <img src="{{ url_for('static', filename='img/admin.png') }}" alt="admin">
+      </div>
+      <div class="caption text-center">
+        <h4>Go to admin zone</h4>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-xs-6 col-md-2">
+    <a href="{{ url_for('buy_gems') }}" class="thumbnail">
+      <div class="img">
+        <img src="{{ url_for('static', filename='img/gem.png') }}" alt="gem">
+      </div>
+      <div class="caption text-center">
+        <h4>Buy 1 Gem for 20 Gold</h4>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-xs-6 col-md-2">
+    <a href="{{ url_for('sell_gems') }}" class="thumbnail">
+      <div class="img">
+        <img src="{{ url_for('static', filename='img/gold.png') }}" alt="gold">
+      </div>
+      <div class="caption text-center">
+        <h4>Buy 20 Gold for 1 Gem</h4>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-xs-6 col-md-2">
+    <a href="{{ url_for('transfer_gold') }}" class="thumbnail">
+      <div class="img">
+        <img src="{{ url_for('static', filename='img/present.png') }}" alt="transfert">
+      </div>
+      <div class="caption text-center">
+        <h4>Transfert Gold to someone</h4>
+      </div>
+    </a>
+  </div>
+
+</div>
+{% endblock %}

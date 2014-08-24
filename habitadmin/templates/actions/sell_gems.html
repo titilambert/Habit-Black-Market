@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Note</h3>
+  </div>
+  <div class="panel-body">
+    To get your UUID and API token, click <a href="{{ habit_url }}/#/options/settings/api" target="_blank">HERE</a>
+  </div>
+</div>
+
+<div class="col-xs-6 col-md-6" >
+<form role="form" method="post" action="{{ url_for('sell_gems') }}">
+  <div class="form-group">
+    <label for="uuid">Your UUID</label>
+    <input name="uuid" type="text" class="form-control" id="uuid" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="apitoken">Your API token</label>
+    <input name="apitoken" type="password" class="form-control" id="apitoken" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="gems">Gems</label>
+    <input name="gems" min="0" type="number" class="form-control" id="gold" placeholder="1" value="1">
+  </div>
+  <a href="{{ url_for('index') }}" class="btn btn-danger" role="button">Cancel</a>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+  <div class="col-xs-6 col-md-6">
+    <a href="#" class="thumbnail">
+      <div class="container">
+        <div class="col-xs-1 col-md-1 text-center">
+          <div class="img">
+            <img src="{{ url_for('static', filename='img/gem.png') }}" alt="gold">
+          </div>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center">
+            <h2><span class="glyphicon glyphicon-arrow-right"></span></h2>
+        </div>
+        <div class="col-xs-1 col-md-1 text-right">
+          <div class="img">
+            <img src="{{ url_for('static', filename='img/gold.png') }}" alt="gem">
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="col-xs-1 col-md-1 text-left">
+            <h2>1&nbsp;Gem</h2>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center">
+            <h2><span class="glyphicon glyphicon-arrow-right"></span></h2>
+        </div>
+        <div class="col-xs-1 col-md-1 text-right">
+            <h2>20&nbsp;Gold</h2>
+        </div>
+      </div>
+    </a>
+  </div>
+
+
+{% endblock %}
+
