@@ -2,3 +2,5 @@
 *.pyc
 env
 habitblackmarket/settings.cfg
+settings.cfg
+config.json

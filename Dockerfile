@@ -30,7 +30,7 @@ RUN cd /opt/habitrpg && bower install --allow-root
 
 # Add config file
 
-ADD ./config.json /opt/habitrpg/
+ADD ./config/config.json /opt/habitrpg/
 
 RUN mkdir -p /opt/habitrpg/build
 
@@ -52,6 +52,6 @@ RUN git clone https://github.com/titilambert/Habit-Black-Market.git habitblackma
 
 RUN pip install -r requirements.txt
 
-ADD ./settings.cfg /opt/habitblackmarket/habitblackmarket
+ADD ./config/settings.cfg /opt/habitblackmarket/habitblackmarket
 
 WORKDIR /opt/habitblackmarket
