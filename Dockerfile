@@ -26,17 +26,19 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 RUN cd /opt/habitrpg && npm install
 
+RUN cd /opt/habitrpg && bower install --allow-root
+
 # Add config file
 
 ADD ./config.json /opt/habitrpg/
 
 RUN mkdir -p /opt/habitrpg/build
 
-RUN cd /opt/habitrpg && bower install --allow-root
-
 # Run server
 
-RUN cd /opt/habitrpg && grunt build:prod 
+WORKDIR /opt/habitrpg
 
-CMD cd /opt/habitrpg && grunt nodemon
+RUN /usr/local/bin/grunt build:prod 
+
+CMD /usr/local/bin/grunt nodemon
 
