@@ -4,9 +4,9 @@ import os
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
-from habitadmin.libs import pyhabitapi
+from habitblackmarket.libs import pyhabitapi
 
-from habitadmin import app
+from habitblackmarket import app
 
 @app.route('/')
 def index():

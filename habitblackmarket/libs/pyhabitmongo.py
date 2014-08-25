@@ -6,7 +6,7 @@ import uuid
 
 from pymongo import MongoClient
 
-from habitadmin import app
+from habitblackmarket import app
 
 #app.config.get('MONGO_HOST')
 #app.config.get('PORT')

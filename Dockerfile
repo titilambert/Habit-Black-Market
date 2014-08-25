@@ -42,3 +42,16 @@ RUN /usr/local/bin/grunt build:prod
 
 CMD /usr/local/bin/grunt nodemon
 
+# Install Black market
+
+RUN apt-get install apache2 libapache2-mod-wsgi
+
+WORKDIR /opt
+
+RUN git clone https://github.com/titilambert/Habit-Black-Market.git habitblackmarket
+
+RUN pip install -r requirements.txt
+
+ADD ./settings.cfg /opt/habitblackmarket/habitblackmarket
+
+WORKDIR /opt/habitblackmarket

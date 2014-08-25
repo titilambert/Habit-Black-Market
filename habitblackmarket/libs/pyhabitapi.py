@@ -4,7 +4,7 @@ from flask import flash
 
 import pyhabitmongo
 
-from habitadmin import app
+from habitblackmarket import app
 
 #app.config.get('HABIT_URL')
 
