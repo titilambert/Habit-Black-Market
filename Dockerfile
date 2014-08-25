@@ -30,7 +30,7 @@ RUN cd /opt/habitrpg && bower install --allow-root
 
 # Add config file
 
-ADD ./config/config.json /opt/habitrpg/
+ADD ./config.json /opt/habitrpg/
 
 RUN mkdir -p /opt/habitrpg/build
 
@@ -44,14 +44,24 @@ CMD /usr/local/bin/grunt nodemon
 
 # Install Black market
 
-RUN apt-get install apache2 libapache2-mod-wsgi
+RUN apt-get install -y apache2 libapache2-mod-wsgi python-pip
 
 WORKDIR /opt
 
 RUN git clone https://github.com/titilambert/Habit-Black-Market.git habitblackmarket
 
+WORKDIR /opt/habitblackmarket
+
 RUN pip install -r requirements.txt
 
-ADD ./config/settings.cfg /opt/habitblackmarket/habitblackmarket
+ADD ./settings.cfg /opt/habitblackmarket/habitblackmarket/
 
-WORKDIR /opt/habitblackmarket
+RUN chown -R www-data: /opt/habitblackmarket/
+
+ADD ./config.sample/apache.conf /etc/apache2/sites-available/habitrpg.conf
+
+RUN a2dissite 000-default
+
+RUN a2ensite habitrpg
+
+RUN service apache2 restart
