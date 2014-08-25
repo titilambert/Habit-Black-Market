@@ -1,20 +1,28 @@
 #!/usr/bin/python
 
 from datetime import datetime
+import sys
 import uuid
 
 from pymongo import MongoClient
 
-client = MongoClient()
+from habitadmin import app
 
-client = MongoClient('localhost', 27017)
+#app.config.get('MONGO_HOST')
+#app.config.get('PORT')
+#app.config.get('DB_NAME')
 
-habitrpg_db = client.habitrpg
+client = MongoClient(app.config.get('MONGO_HOST'), int(app.config.get('MONGO_PORT')))
+
+if not app.config.get('DB_NAME') in client.database_names():
+    raise Exception("Bad Mongo database name")
+
+habitrpg_db = getattr(client, app.config.get('DB_NAME'))
 
 
 def clear_db():
     import pdb;pdb.set_trace()
-    client.drop_database("habitrpg")
+    client.drop_database(app.config.get('DB_NAME'))
 
 
 def guild_add(name, description, leader, public=False):
@@ -258,6 +266,37 @@ def user_increase_balance(username, balance):
     habitrpg_db.users.update({"_id": user_id},
                              {"$set": {'balance': balance}}
                              )
+
+def user_gold_to_gem(user_id, nb_gem):
+    GOLD_GEM_RATIO = 20
+    balance = nb_gem / 4.0
+    habitrpg_db.users.update({"_id": user_id},
+                             {"$inc": {'balance': balance}}
+                             )
+    cost = 0 - (nb_gem * GOLD_GEM_RATIO)
+    habitrpg_db.users.update({"_id": user_id},
+                             {"$inc": {'stats.gp': cost}}
+                             )
+
+def user_gem_to_gold(user_id, nb_gem):
+    GOLD_GEM_RATIO = 20
+    balance = 0 - nb_gem / 4.0
+    habitrpg_db.users.update({"_id": user_id},
+                             {"$inc": {'balance': balance}}
+                             )
+    cost = nb_gem * GOLD_GEM_RATIO
+    habitrpg_db.users.update({"_id": user_id},
+                             {"$inc": {'stats.gp': cost}}
+                             )
+
+def user_transfer_gold(user_id, receiver_user_id, gold):
+    habitrpg_db.users.update({"_id": user_id},
+                             {"$inc": {'stats.gp': -gold}}
+                             )
+    habitrpg_db.users.update({"_id": receiver_user_id},
+                             {"$inc": {'stats.gp': gold}}
+                             )
+
 
 def user_add(username, email):
     """ Create new user """

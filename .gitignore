@@ -1,0 +1,4 @@
+.*.swp
+*.pyc
+env
+habitadmin/settings.cfg
