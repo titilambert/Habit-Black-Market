@@ -34,13 +34,11 @@ ADD ./config.json /opt/habitrpg/
 
 RUN mkdir -p /opt/habitrpg/build
 
-# Run server
+# Build server
 
 WORKDIR /opt/habitrpg
 
 RUN /usr/local/bin/grunt build:prod 
-
-CMD /usr/local/bin/grunt nodemon
 
 # Install Black market
 
@@ -64,4 +62,6 @@ RUN a2dissite 000-default
 
 RUN a2ensite habitrpg
 
-RUN service apache2 restart
+# RUN SERVER
+
+CMD service apache2 restart && cd /opt/habitrpg && /usr/local/bin/grunt nodemon
