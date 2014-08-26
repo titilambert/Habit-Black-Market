@@ -42,7 +42,7 @@ RUN /usr/local/bin/grunt build:prod
 
 # Install Black market
 
-RUN apt-get install -y apache2 libapache2-mod-wsgi python-pip
+RUN apt-get install -y lighttpd python-pip
 
 WORKDIR /opt
 
@@ -52,16 +52,16 @@ WORKDIR /opt/habitblackmarket
 
 RUN pip install -r requirements.txt
 
+RUN pip install flup
+
 ADD ./settings.cfg /opt/habitblackmarket/habitblackmarket/
 
-RUN chown -R www-data: /opt/habitblackmarket/
+#RUN chown -R www-data: /opt/habitblackmarket/
 
-ADD ./config.sample/apache.conf /etc/apache2/sites-available/habitrpg.conf
-
-RUN a2dissite 000-default
-
-RUN a2ensite habitrpg
+ADD ./config.sample/lighttpd.conf /etc/lighttpd/conf-enabled/habitrpg.conf
 
 # RUN SERVER
 
-CMD service apache2 restart && cd /opt/habitrpg && /usr/local/bin/grunt nodemon
+RUN lighttpd-enable-mod fastcgi
+
+CMD ip a && service lighttpd restart && cd /opt/habitrpg && /usr/local/bin/grunt nodemon
