@@ -3,6 +3,7 @@ SECRET_KEY='development key'
 USERNAME='admin'
 PASSWORD='admin'
 HABIT_URL="https://myhabitrpm.com"
+HABIT_LINK="https://myhabitrpm.com"
 MONGO_HOST='localhost'
 MONGO_PORT=27017
 DB_NAME="habitrpg"

@@ -48,7 +48,7 @@ def buy_gems():
             flash('Unknown error', 'danger')
 
     return render_template('actions/buy_gems.html',
-                           habit_url=app.config['HABIT_URL'])
+                           habit_link=app.config['HABIT_LINK'])
 
 @app.route('/gems/sell', methods=['GET', 'POST'])
 def sell_gems():
@@ -86,7 +86,7 @@ def sell_gems():
 
 
     return render_template('actions/sell_gems.html',
-                           habit_url=app.config['HABIT_URL'])
+                           habit_link=app.config['HABIT_LINK'])
 
 
 @app.route('/gold/transfer', methods=['GET', 'POST'])
@@ -128,7 +128,7 @@ def transfer_gold():
         elif ret is not False:
             flash('Unknown error', 'danger')
     return render_template('actions/transfer_gold.html',
-                           habit_url=app.config['HABIT_URL'])
+                           habit_link=app.config['HABIT_LINK'])
 
 
 if __name__ == "__main__":
