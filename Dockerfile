@@ -30,8 +30,6 @@ RUN cd /opt/habitrpg && bower install --allow-root
 
 # Add config file
 
-ADD ./config.json /opt/habitrpg/
-
 RUN mkdir -p /opt/habitrpg/build
 
 # Build server
@@ -54,11 +52,21 @@ RUN pip install -r requirements.txt
 
 RUN pip install flup
 
+# Aff config files
+
 ADD ./settings.cfg /opt/habitblackmarket/habitblackmarket/
 
-#RUN chown -R www-data: /opt/habitblackmarket/
-
 ADD ./config.sample/lighttpd.conf /etc/lighttpd/conf-enabled/habitrpg.conf
+
+ADD ./config.json /opt/habitrpg/
+
+# Patch habitrpg
+
+ADD patches/menu.patch /opt/habitrpg/
+
+WORKDIR /opt/habitrpg/
+
+RUN patch -p1 < menu.patch
 
 # RUN SERVER
 

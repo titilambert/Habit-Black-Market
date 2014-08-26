@@ -1,0 +1,24 @@
+diff --git a/views/shared/header/menu.jade b/views/shared/header/menu.jade
+index 42a5895..b3f7869 100644
+--- a/views/shared/header/menu.jade
++++ b/views/shared/header/menu.jade
+@@ -43,6 +43,9 @@ nav.toolbar(ng-controller='AuthCtrl', ng-class='{active: isToolbarHidden}')
+                 a(ui-sref='options.inventory.mounts')=env.t('mounts')
+               li
+                 a(ui-sref='options.inventory.equipment')=env.t('equipment')
++            ul.toolbar-submenu
++              li
++                a(href='/blackmarket/', target='_blank')='Black Market'
+           ul.toolbar-controls
+             li.toolbar-subscribe-button
+               button(ng-if='!user.purchased.plan.customerId',ui-sref='options.settings.subscription',popover-trigger='mouseenter',popover-placement='bottom',popover-title=env.t('subscriptions'),popover=env.t('subDescription'),popover-append-to-body='true')=env.t('subscribe')
+@@ -99,6 +102,9 @@ nav.toolbar(ng-controller='AuthCtrl', ng-class='{active: isToolbarHidden}')
+               a(ui-sref='options.inventory.mounts')=env.t('mounts')
+             li
+               a(ui-sref='options.inventory.equipment')=env.t('equipment')
++      li.toolbar-button
++        a(href='/blackmarket/', target='_blank')
++          span='Black Market'
+     ul.toolbar-subscribe(ng-if='!user.purchased.plan.customerId')
+       li.toolbar-subscribe-button
+         button(ui-sref='options.settings.subscription',popover-trigger='mouseenter',popover-placement='bottom',popover-title=env.t('subscriptions'),popover=env.t('subDescription'),popover-append-to-body='true')=env.t('subscribe')
