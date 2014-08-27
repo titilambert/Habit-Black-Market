@@ -440,4 +440,7 @@ def user_add(username, email):
     habitrpg_db.users.insert(user)
     
 
-
+def users_set_newstuff(state=True):
+    habitrpg_db.users.update({"profile.name": "tcohen"},
+                             {"$set": { "flags.newStuff": state}},
+                             )

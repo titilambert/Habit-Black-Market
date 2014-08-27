@@ -32,6 +32,47 @@ def get_user(uuid, apitoken):
     flash('Error during login', 'danger')
     return None
 
+def publish(uuid, apitoken, title, subtitle, content):
+    data = get_user(uuid, apitoken)
+    if not 'stats' in data:
+        return None
+    news_files = app.config.get('HABIT_NEWSTUFF_PATH', None)
+    if news_files is None:
+        flash('HABIT_NEWSTUFF_PATH is missing in the server configuration', 'danger')
+        return False
+    f = open(news_files, "r")
+    old_news = f.read()
+    f.close()
+    title = """table
+  tr
+    td
+      .npc_bailey
+    td
+      .popover.static-popover.fade.right.in.wide-popover
+        .arrow
+        h3.popover-title
+          %(title)s
+        .popover-content"""
+    if subtitle != '':
+        subtitle = "          h5 " + subtitle
+    lines = content.split("\n")
+    lines = ["          p " + line.strip() for line in lines]
+    content = "\n".join(lines)
+    author = "          p.small.muted by " + data['profile']['name']
+    if subtitle != '':
+        news = "\n".join((title, subtitle, content, author, old_news)) 
+    else:
+        news = "\n".join((title, content, author, old_news))
+    f = open(news_files, "w")
+    f.write(news)
+    f.close()
+    pyhabitmongo.users_set_newstuff(True)
+    return True
+"""
+  figure.herobox(ng-click='spell ? castEnd(profile, "user", $event) : clickMember(profile._id)', data-name='{{profile.profile.name}}', class='background_{{profile.preferences.background}} #{opts.main ? "isUser" : ""} #{opts.minimal ? "minimal" : ""}', ng-class='{hasPet: (#{!opts.minimal} && profile.items.currentPet), hasMount: (#{!opts.minimal} && profile.items.currentMount), noBackgroundImage: !profile.preferences.background, "cast-target": applyingAction, isLeader: party.leader==profile._id}')
+"""
+
+
 def buy_gems(uuid, apitoken, nb_gem):
     data = get_user(uuid, apitoken)
     if not 'stats' in data:

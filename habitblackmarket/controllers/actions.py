@@ -13,6 +13,41 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/publish', methods=['GET', 'POST'])
+def publish():
+    if request.method == 'POST':
+        if request.form.get('uuid', '') == '':
+            flash('No UUID', 'danger')
+            return redirect(url_for('publish'))
+        if request.form.get('apitoken', '') == '':
+            flash('No API token', 'danger')
+            return redirect(url_for('publish'))
+        if request.form.get('title', '') == '':
+            flash('No title', 'danger')
+            return redirect(url_for('publish'))
+        if request.form.get('content', '') == '':
+            flash('No content', 'danger')
+            return redirect(url_for('publish'))
+
+        uuid = request.form.get('uuid', '')
+        apitoken = request.form.get('apitoken', '')
+        title = request.form.get('title', '')
+        content = request.form.get('content', '')
+        subtitle = request.form.get('subtitle', '')
+        # TODO decorator
+        if not pyhabitapi.login(uuid, apitoken):
+            return redirect(url_for('publish'))
+        ret = pyhabitapi.publish(uuid, apitoken, title, subtitle, content)
+        if ret == True:
+            flash('News published', 'success')
+            return redirect(url_for('index'))
+        elif ret is not False:
+            flash('Unknown error', 'danger')
+
+    return render_template('actions/publish.html',
+                           habit_link=app.config['HABIT_LINK'])
+
+
 @app.route('/gems/buy', methods=['GET', 'POST'])
 def buy_gems():
     if request.method == 'POST':
