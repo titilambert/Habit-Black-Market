@@ -51,8 +51,8 @@ def publish(uuid, apitoken, title, subtitle, content):
       .popover.static-popover.fade.right.in.wide-popover
         .arrow
         h3.popover-title
-          %(title)s
-        .popover-content"""
+          %s
+        .popover-content""" % title
     if subtitle != '':
         subtitle = "          h5 " + subtitle
     lines = content.split("\n")

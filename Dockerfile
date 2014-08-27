@@ -68,6 +68,18 @@ WORKDIR /opt/habitrpg/
 
 RUN patch -p1 < menu.patch
 
+RUN rm -f /opt/habitrpg/views/shared/new-stuff.jade
+
+RUN touch /opt/habitrpg/views/shared/new-stuff.jade
+
+RUN chmod a+w /opt/habitrpg/views/shared/new-stuff.jade
+
+# Update habitblackmarket
+
+WORKDIR /opt/habitblackmarket
+
+RUN git pull origin master
+
 # RUN SERVER
 
 RUN lighttpd-enable-mod fastcgi

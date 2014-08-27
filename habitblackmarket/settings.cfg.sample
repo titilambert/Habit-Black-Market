@@ -4,6 +4,7 @@ USERNAME='admin'
 PASSWORD='admin'
 HABIT_URL="https://myhabitrpm.com"
 HABIT_LINK="https://myhabitrpm.com"
+HABIT_NEWSTUFF_PATH="/opt/habitrpg/views/shared/new-stuff.jade"
 MONGO_HOST='localhost'
 MONGO_PORT=27017
 DB_NAME="habitrpg"
