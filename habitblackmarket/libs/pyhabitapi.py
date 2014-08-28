@@ -51,7 +51,7 @@ def publish(uuid, apitoken, title, subtitle, content):
       .popover.static-popover.fade.right.in.wide-popover
         .arrow
         h3.popover-title
-          %s
+          h3 %s
         .popover-content""" % title
     if subtitle != '':
         subtitle = "          h5 " + subtitle
@@ -68,9 +68,6 @@ def publish(uuid, apitoken, title, subtitle, content):
     f.close()
     pyhabitmongo.users_set_newstuff(True)
     return True
-"""
-  figure.herobox(ng-click='spell ? castEnd(profile, "user", $event) : clickMember(profile._id)', data-name='{{profile.profile.name}}', class='background_{{profile.preferences.background}} #{opts.main ? "isUser" : ""} #{opts.minimal ? "minimal" : ""}', ng-class='{hasPet: (#{!opts.minimal} && profile.items.currentPet), hasMount: (#{!opts.minimal} && profile.items.currentMount), noBackgroundImage: !profile.preferences.background, "cast-target": applyingAction, isLeader: party.leader==profile._id}')
-"""
 
 
 def buy_gems(uuid, apitoken, nb_gem):
