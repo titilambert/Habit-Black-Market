@@ -78,10 +78,12 @@ RUN chmod a+w /opt/habitrpg/views/shared/new-stuff.jade
 
 WORKDIR /opt/habitblackmarket
 
+RUN echo Update
+
 RUN git pull origin master
 
 # RUN SERVER
 
 RUN lighttpd-enable-mod fastcgi
 
-CMD ip a && service lighttpd restart && cd /opt/habitrpg && /usr/local/bin/grunt nodemon
+CMD chmod a+w /opt/habitrpg/views/shared/new-stuff.jade && ip a && service lighttpd restart && cd /opt/habitrpg && /usr/local/bin/grunt nodemon
