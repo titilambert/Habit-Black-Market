@@ -78,7 +78,7 @@ RUN chmod a+w /opt/habitrpg/views/shared/new-stuff.jade
 
 WORKDIR /opt/habitblackmarket
 
-RUN echo Update
+RUN echo Update 2
 
 RUN git pull origin master
 
