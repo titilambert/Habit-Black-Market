@@ -443,4 +443,5 @@ def user_add(username, email):
 def users_set_newstuff(state=True):
     habitrpg_db.users.update({},
                              {"$set": { "flags.newStuff": state}},
+                             multi=True,   
                              )
